@@ -19,7 +19,7 @@ environment:
 dependencies:
   bloc: ^2.0.0
   flutter_bloc: ^2.0.0
-  dio: ^3.0.4
+  dio: ^2.1.13
   rxdart: ^0.22.6
   bloc_pattern: ^2.5.1
   flutter:
