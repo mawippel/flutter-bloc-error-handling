@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_error_handling/src/pages/home/create/create_page.dart';
 import 'package:flutter_error_handling/src/pages/home/home_bloc.dart';
 import 'package:flutter_error_handling/src/pages/home/home_module.dart';
 import 'package:flutter_error_handling/src/shared/models/post_model.dart';
@@ -48,6 +49,15 @@ class _HomePageState extends State<HomePage> {
             }
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CreatePage()));
+        },
       ),
     );
   }
