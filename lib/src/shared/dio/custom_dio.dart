@@ -2,12 +2,12 @@ import 'package:flutter_error_handling/src/shared/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_error_handling/src/shared/dio/interceptors.dart';
 
-class CustomDio extends Dio {
+class CustomDio {
+  final Dio client;
 
-  CustomDio(){
-    options.baseUrl = BASE_URL;
-    interceptors.add(CustomInterceptions());
-    options.connectTimeout = 5000;
+  CustomDio(this.client) {
+    client.options.baseUrl = BASE_URL;
+    client.interceptors.add(CustomInterceptor());
+    client.options.connectTimeout = 5000;
   }
-
 }

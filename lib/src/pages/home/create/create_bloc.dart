@@ -7,7 +7,9 @@ class CreateBloc extends BlocBase {
   
   final HomeRepository repo;
 
-  CreateBloc(this.repo);
+  CreateBloc(this.repo){
+    responseOut = post.switchMap(observablePost);
+  }
 
   String title;
   String body;
@@ -16,7 +18,7 @@ class CreateBloc extends BlocBase {
 
   PostModel get postValue => post.value;
   Sink<PostModel> get postIn => post.sink;
-  Observable<int> get responseOut => post.switchMap(observablePost);
+  Observable<int> responseOut;
 
   Stream<int> observablePost(PostModel data) async* {
     yield 0;
@@ -30,6 +32,7 @@ class CreateBloc extends BlocBase {
 
   @override
   void dispose() {
+    post.close();
     super.dispose();
   }
   

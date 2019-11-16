@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class CustomInterceptions extends InterceptorsWrapper {
+class CustomInterceptor extends InterceptorsWrapper {
   
   @override
   Future onRequest(RequestOptions options) {
