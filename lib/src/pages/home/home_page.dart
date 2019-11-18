@@ -3,6 +3,7 @@ import 'package:flutter_error_handling/src/pages/home/create/create_page.dart';
 import 'package:flutter_error_handling/src/pages/home/home_bloc.dart';
 import 'package:flutter_error_handling/src/pages/home/home_module.dart';
 import 'package:flutter_error_handling/src/shared/models/post_model.dart';
+import 'package:flutter_error_handling/src/shared/widgets/custom_stream_builder.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -28,25 +29,16 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: StreamBuilder<List<PostModel>>(
-          stream: bloc.responseOut,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text('ERROR'),
-              );
-            }
-            if (snapshot.hasData) {
-              return Column(
-                children: snapshot.data
-                    .map((post) => ListTile(
-                          title: Text(post.title),
-                        ))
-                    .toList(),
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
+        child: CustomStreamBuilder<List<PostModel>>(
+          observable: bloc.responseOut,
+          function: (context, snapshot) {
+            return Column(
+              children: snapshot.data
+                  .map((post) => ListTile(
+                        title: Text(post.title),
+                      ))
+                  .toList(),
+            );
           },
         ),
       ),
@@ -54,9 +46,7 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CreatePage()));
+              context, MaterialPageRoute(builder: (context) => CreatePage()));
         },
       ),
     );
